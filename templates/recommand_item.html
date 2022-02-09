@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+     {% block body %}
+     <div class="bd-cheatsheet container-fluid bg-body">
+          <section id="content">
+              <h2 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3">AI Pratice</h2>
+              <article class="my-3" id="typography">
+                    <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+                    </div>
+                    <div>
+                        <form method="POST" action="{{url_for('recommand_result')}}">
+                            <h1>推薦客戶產品與課程</h1>
+                            <p>用item2vec推薦客戶產品或課程，依照客戶最後一筆交易商品進行推薦</p>
+                              <p>客戶編號: <input type = "text" name = "Name" /></p>
+                              <div class="col-12 mt-3 pt-3">
+                                <button type="submit" class="btn btn-outline-primary">Submit
+                                </button>
+                              </div>
+                        </form>
+                        <footer class="mt-auto text-dark-50">
+                            <p>Creating by wendyyao</p>
+                        </footer>
+                    </div>
+              </article>
+          </section>
+      </div>
+      <script type="text/javascript" src="{{ url_for('static', filename='assets/dist/js/bootstrap.bundle.min.js') }}"></script>
+    {% endblock %}
