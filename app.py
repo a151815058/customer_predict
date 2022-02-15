@@ -52,8 +52,7 @@ def recommand_result():
         return render_template('recommand_result.html',recommand_item =recommand_item.to_numpy(),
                                                        last_item_description = last_item_description.values.item(),
                                                        len = len(recommand_item),
-                                                       member_code = member_code,
-                                                       member_name = member1['member_name'].to_string(index=False)
+                                                       member_code = member_code
                                 )
 
 @app.route('/result',methods=['GET', 'POST'])
@@ -62,10 +61,18 @@ def result():
         member_code = request.values['Name']
         rslt_df=get_predict_result(member_code)
         print(rslt_df)
+        if rslt_df['Segment'].to_string(index=False) == 'Mid-Value':
+            clustring = '中價值客戶群'
+        elif rslt_df['Segment'].to_string(index=False) == 'Low-Value':
+            clustring = '低價值客戶群'
+        else:
+            clustring = '高價值客戶群'
+
         return render_template('result.html',member_code=member_code,
                                              frequency=rslt_df['frequency'].to_string(index=False),
                                              recency=rslt_df['recency'].to_string(index=False),
                                              T=rslt_df['T'].to_string(index=False),
+                                             clustring=clustring,
                                              monetary_value=rslt_df['monetary_value'].to_string(index=False),
                                              predict_purch_10=rslt_df['predict_purch_10'].to_string(index=False),
                                              predict_purch_30=rslt_df['predict_purch_30'].to_string(index=False),

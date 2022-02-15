@@ -12,6 +12,7 @@
                     <h1>預測客戶價值</h1>
                     <h3 class="sticky-xl-top fw-bold">分析結果如下</h3>
                     <h5>客戶代碼: {{ member_code }}</h5>
+                    該客戶屬於<font color="#FF0000"><strong>{{ clustring }}</strong></font>
                     <article class="my-3" id="accordion">
                       <div>
                         <div class="accordion" id="accordionExample">
@@ -47,12 +48,12 @@
                             </div>
                           </div>
                           <div class="accordion-item">
-                            <h4 class="accordion-header" id="headingTwo">
-                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h4 class="accordion-header" id="headingThree">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 客戶終生價值
                               </button>
                             </h4>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                               <div class="accordion-body">
                                 <ul>
                                     {{ CLV }}
@@ -64,12 +65,12 @@
                             </div>
                           </div>
                           <div class="accordion-item">
-                            <h4 class="accordion-header" id="headingThree">
-                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <h4 class="accordion-header" id="headingFour">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                 預測回店機率
                               </button>
                             </h4>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                               <div class="accordion-body">
                                 <ul>
                                     <a>預計 10 天內的購買機率為=</a>{{ predict_purch_10}}
@@ -87,12 +88,12 @@
                             </div>
                           </div>
                           <div class="accordion-item">
-                            <h4 class="accordion-header" id="headingFour">
-                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <h4 class="accordion-header" id="headingFive">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                                 客戶存活率
                               </button>
                             </h4>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="collapseFour" data-bs-parent="#accordionExample">
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="collapseFive" data-bs-parent="#accordionExample">
                               <div class="accordion-body">
                                   <ul>
                                       <a>存活率為</a>{{ prob_alive }}<br>

@@ -11,7 +11,7 @@ dt_string = now.strftime("%Y-%m-%d")
 directory = "sales_data_"+dt_string
 path = os.path.join(os.path.dirname(os.path.abspath(__file__))+'/', directory)
 print(path)
-c_rft = pd.read_csv(path+'/rft.csv')
+c_rft = pd.read_csv(path+'/rft_with_clustring.csv')
 
 # BG/NBD model
 bgf = BetaGeoFitter(penalizer_coef=1e-06)
