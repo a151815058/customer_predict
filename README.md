@@ -15,6 +15,7 @@
 2. rft.csv
 3. predict_rlt.csv
 4. ltv.csv
-5. stocklens_stock_embedding.csv
+5. rft_with_clustring.csv
+6. stocklens_stock_embedding.csv
 
 產生上面檔案，執行app.py才不會有問題
