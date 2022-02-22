@@ -2,8 +2,8 @@
      {% block body %}
          <!-- Don't forget the "|safe"! -->
          <div class="bd-cheatsheet container-fluid bg-body">
-             <h3>新客與舊客每個月的收入貢獻比：</h3><br>
-             <a>顯示每個月新客與舊客每個月的收入貢獻比。</a><br>
+             <h3>銷售資料分析：</h3><br>
+             <a>每個月源於新客與舊客的營收貢獻比較。</a><br>
              <image type="image/svg+xml" src= {{ chart|safe }} width="1000" height="1100" />
          </div>
         <script type="text/javascript" src="{{ url_for('static', filename='assets/dist/js/bootstrap.bundle.min.js') }}"></script>

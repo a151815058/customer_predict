@@ -10,7 +10,7 @@
                 </div>
                 <div>
                     <h1>預測客戶價值</h1>
-                    <h3 class="sticky-xl-top fw-bold">分析結果如下</h3>
+                    <h3 class="sticky-xl-top fw-bold">分析結果如下:</h3>
                     <h5>客戶代碼: {{ member_code }}</h5>
                     該客戶屬於<font color="#FF0000"><strong>{{ clustring }}</strong></font>
                     <article class="my-3" id="accordion">
@@ -19,30 +19,31 @@
                           <div class="accordion-item">
                             <h4 class="accordion-header" id="headingOne">
                               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                RFM
+                                RFTM
                               </button>
                             </h4>
                             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                               <div class="accordion-body">
                                 <ul>
-                                    <a>Frequency:</a>{{ frequency }}
+                                    <a>Recency: </a>{{ recency }}
                                 </ul>
                                 <ul>
-                                    <a>Recency:</a>{{ recency }}
+                                    <a>Frequency: </a>{{ frequency }}
                                 </ul>
                                 <ul>
-                                    <a>Age T:</a>{{ T }}
+                                    <a>Age T: </a>{{ T }}
                                 </ul>
                                 <ul>
-                                    <a>Monetary_value:</a>{{ monetary_value }}
+                                    <a>Monetary_value: </a>{{ monetary_value }}
                                 </ul>
                               </div>
                               <a>
                                 <div>
                                 備註： <br>
-                                1. 最近一次消費（recency）。顧客上次消費時間愈近，價值愈大。  &nbsp; <br>
-                                2. 消費頻率（frequency）。顧客在一個月或一年中，買了多少次東西？購買頻率愈高，用戶價值愈大。 &nbsp;  <br>
-                                3. 消費金額（monetary）。顧客一共在產品上花了多少錢？創造了多少利潤？消費金額愈高，用戶價值愈大。 &nbsp; <br>
+                                1. Recency: 客戶第一次和最近一次購買之間的天數。  &nbsp; <br>
+                                2. Frequency: 客戶重複購買的次數，則總購買次數減一（扣掉第一次購買）。 &nbsp;  <br>
+                                3. Age T: 客戶進行第一次購買後，至資料集截止日的天數。 &nbsp;  <br>
+                                4. Monetary_value: 客戶在資料集時間範圍內的消費總金額。 &nbsp; <br>
                                 </div>
                               </a>
                             </div>
@@ -50,7 +51,7 @@
                           <div class="accordion-item">
                             <h4 class="accordion-header" id="headingThree">
                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                客戶終生價值
+                                客戶終身價值
                               </button>
                             </h4>
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
@@ -60,7 +61,7 @@
                                 </ul>
                               </div>
                               <div>
-                                  <a>備註：顧客終身價值（LTV）可以視為是一個顧客在特定期間於你的商品上花費的總金額，表示企業可以合理的從單個客戶獲得的總收入指標。</a>
+                                  <a>備註：客戶終身價值（CLV）是客戶在生命週期內（程式碼指定為12個月）將消費的預估總金額，表示企業可合理的從單個客戶獲得的總收入指標。</a>
                               </div>
                             </div>
                           </div>
@@ -73,16 +74,16 @@
                             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                               <div class="accordion-body">
                                 <ul>
-                                    <a>預計 10 天內的購買機率為=</a>{{ predict_purch_10}}
+                                    <a>預計 10 天內的購買次數為= </a>{{ predict_purch_10}}
                                 </ul>
                                 <ul>
-                                    <a>預計 30 天內的購買機率為=</a>{{ predict_purch_30 }}
+                                    <a>預計 30 天內的購買次數為= </a>{{ predict_purch_30 }}
                                 </ul>
                                 <ul>
-                                    <a>預計 60 天內的購買機率為=</a>{{ predict_purch_60 }}
+                                    <a>預計 60 天內的購買次數為= </a>{{ predict_purch_60 }}
                                 </ul>
                                 <ul>
-                                    <a>預計 90 天內的購買機率為=</a>{{ predict_purch_90 }}
+                                    <a>預計 90 天內的購買次數為= </a>{{ predict_purch_90 }}
                                 </ul>
                               </div>
                             </div>
@@ -90,17 +91,17 @@
                           <div class="accordion-item">
                             <h4 class="accordion-header" id="headingFive">
                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                客戶存活率
+                                客戶留存率
                               </button>
                             </h4>
                             <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="collapseFive" data-bs-parent="#accordionExample">
                               <div class="accordion-body">
                                   <ul>
-                                      <a>存活率為</a>{{ prob_alive }}<br>
+                                      <a>留存率為 </a>{{ prob_alive }}<br>
                                   </ul>
                               </div>
                             <div>
-                                <a>備註：留存率越高的客戶，流失率越低</a>
+                                <a>備註：留存率愈高的客戶，流失率愈低，也代表有更多的經常性消費。 </a>
                             </div>
                             </div>
                           </div>
