@@ -49,8 +49,8 @@ c_rft = order_cluster('FrequencyCluster', 'frequency',c_rft,True)
 
 #3. Monetary
 #remove outlier
-lowerbound,highbound = Outlier_treatment(c_rft['monetary_value'])
-c_rft = c_rft[(c_rft['monetary_value'] < highbound)]
+#lowerbound,highbound = Outlier_treatment(c_rft['monetary_value'])
+#c_rft = c_rft[(c_rft['monetary_value'] < highbound)]
 #k-means
 kmeans = KMeans(n_clusters=4)
 kmeans.fit(c_rft[['monetary_value']])

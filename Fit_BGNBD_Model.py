@@ -27,9 +27,9 @@ print(bgf.summary)
 
 # predict purchases for a selected customer for t days
 t = 30
-custID = 9100000000269
+custID = 9100000072913
 
-df_rft_C = c_rft.loc[c_rft['CustomerID'] == custID]
+df_rft_C = c_rft.loc[c_rft['member_code'] == custID]
 predC = bgf.predict(    t,
                         df_rft_C["frequency"],
                         df_rft_C["recency"],

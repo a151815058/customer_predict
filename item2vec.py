@@ -17,7 +17,7 @@ data = pd.read_csv(path+'/sales_data.csv')
 
 text_num = 0
 with open(path+'/products.txt', 'w+', encoding='utf-8') as f:
-    for text in data.Description.unique():
+    for text in data.stock_description.unique():
         f.write(text+'\n')
         text_num += 1
         if text_num % 100 == 0:

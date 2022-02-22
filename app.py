@@ -146,7 +146,7 @@ if __name__ == '__main__':
     app.run()
 
 def get_predict_result(member_code):
-    rslt_df = c_ltv[c_ltv['CustomerID'] == np.float64(member_code)]
+    rslt_df = c_ltv[c_ltv['member_code'] == np.float64(member_code)]
     rslt_df = rslt_df.drop('Unnamed: 0',axis=1)
     return rslt_df
 
@@ -163,8 +163,8 @@ def get_recommand_item_10(member_code):
     return item_description,recommand_item_result
 
 def get_customer_last_product(member_code):
-    member1 = sale_data.loc[sale_data['CustomerID'] == np.float64(member_code)]
-    Description = member1['Description'].tail(1)
+    member1 = sale_data.loc[sale_data['member_code'] == np.float64(member_code)]
+    Description = member1['stock_description'].tail(1)
     return Description
 
 
