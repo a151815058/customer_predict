@@ -59,7 +59,7 @@ df1['member_start_date'] = pd.to_datetime(df1['member_start_date'] )
 df1.loc[df1['sale_date'] > df1['member_start_date'],'customer_type']='Existing'
 
 #catch date <= 2019-12-31 as train data
-df1_train = df1.loc[df1['sale_date'] <= datetime.strptime('20191231', "%Y%m%d").date()]
+df1_train = df1.loc[df1['sale_date'] <= datetime.strptime('20201031', "%Y%m%d").date()]
 print((df1_train))
 
 # delete columns that are not useful
