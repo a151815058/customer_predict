@@ -31,7 +31,7 @@ ltv_data = order_cluster('CLVCluster', 'CLV',ltv_data,True)
 ltv_data.groupby('CLVCluster')['CLV'].describe()
 
 di = {0:'Low', 1:'Mid', 2:'High'}
-ltv_data['Segment'] = ltv_data['CLVCluster'].map(di)
+ltv_data['clv_Segment'] = ltv_data['CLVCluster'].map(di)
 print(ltv_data)
 
 ltv_data.to_csv(path+'/ltv_with_clustring.csv')

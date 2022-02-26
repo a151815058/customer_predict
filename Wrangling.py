@@ -56,6 +56,10 @@ df1 = df1[df1["Quantity"] > 0]
 # revenues = quantity * unitprice
 df1["Revenue"] = df1["Quantity"] * df1["UnitPrice"]
 
+# remove CustomerID is null
+df1.drop(df1[df1['CustomerID'].isnull()].index,inplace=True)
+
+
 #抓出Revenue異常值
 lowerbound,highbound = Outlier_treatment(df1['Revenue'])
 df1[(df1['Revenue']< lowerbound) | (df1['Revenue']>highbound)]
