@@ -4,8 +4,9 @@
 1. wrangle.py
 2. Fit_BGNBD_model.py
 3. Fit_GammaGamma_model.py
-4. item2vec.py
-5. app.py
+4. clv_clustring.py
+5. item2vec.py
+6. app.py
 
 ## 結果檔案
 正確執行後，會產生一個以當天日期命名的資料夾，裡面分別有：
