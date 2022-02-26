@@ -1,4 +1,4 @@
-﻿# customer_predict
+﻿# customer_predict 客戶價值預測與產品推薦網站
 
 ## 執行方式
 1. wrangle.py
