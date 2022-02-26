@@ -13,11 +13,11 @@ now = datetime.now()
 dt_string = now.strftime("%Y-%m-%d")
 directory = "sales_data_"+dt_string
 path = os.path.join(os.path.dirname(os.path.abspath(__file__))+'/', directory)
-data = pd.read_csv(path+'/sales_data.csv')
+data = pd.read_csv(path+'/sales_data_with_wrangling.csv')
 
 text_num = 0
 with open(path+'/products.txt', 'w+', encoding='utf-8') as f:
-    for text in data.stock_description.unique():
+    for text in data.Description.unique():
         f.write(text+'\n')
         text_num += 1
         if text_num % 100 == 0:

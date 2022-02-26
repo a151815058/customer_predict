@@ -21,10 +21,10 @@ directory = "sales_data_"+dt_string
 path = os.path.join(os.path.dirname(os.path.abspath(__file__))+'/', directory)
 
 # Read sales_data
-sale_data = pd.read_csv(path+'/sales_data.csv')
+sale_data = pd.read_csv(path+'/sales_data_with_wrangling.csv')
 
 # Read customer ltv
-c_ltv = pd.read_csv(path+'/ltv.csv')
+c_ltv = pd.read_csv(path+'/ltv_with_clustring.csv')
 
 #Read stocklens_stock_embedding
 stocklens_stock_embedding = pd.read_csv(path+'/stocklens_stock_embedding.csv')
@@ -47,19 +47,19 @@ def recommand_item():
 @app.route('/recommand_result',methods=['GET', 'POST'])
 def recommand_result():
     if request.method == 'POST':
-        member_code = request.values['Name']
-        last_item_description,recommand_item = get_recommand_item_10(member_code)
+        CustomerID = request.values['Name']
+        last_item_description,recommand_item = get_recommand_item_10(CustomerID)
         return render_template('recommand_result.html',recommand_item =recommand_item.to_numpy(),
                                                        last_item_description = last_item_description.values.item(),
                                                        len = len(recommand_item),
-                                                       member_code = member_code
+                                                       member_code = CustomerID
                                 )
 
 @app.route('/result',methods=['GET', 'POST'])
 def result():
     if request.method == 'POST':
-        member_code = request.values['Name']
-        rslt_df=get_predict_result(member_code)
+        CustomerID = request.values['Name']
+        rslt_df=get_predict_result(CustomerID)
         print(rslt_df)
         if rslt_df['Segment'].to_string(index=False) == 'Mid-Value':
             clustring = '中價值客戶群'
@@ -68,7 +68,7 @@ def result():
         else:
             clustring = '高價值客戶群'
 
-        return render_template('result.html',member_code=member_code,
+        return render_template('result.html',member_code=CustomerID,
                                              frequency=rslt_df['frequency'].to_string(index=False),
                                              recency=rslt_df['recency'].to_string(index=False),
                                              T=rslt_df['T'].to_string(index=False),
@@ -85,8 +85,8 @@ def result():
 @app.route('/return_json',methods=['GET', 'POST'])
 def return_json():
     if request.method == 'POST':
-        member_code = request.values['Name']
-        rslt_df = get_predict_result(member_code)
+        CustomerID = request.values['Name']
+        rslt_df = get_predict_result(CustomerID)
         jsonfiles = rslt_df.to_dict('records')
         jsonStr = json.dumps(jsonfiles, indent = 4)
         print(jsonStr)
@@ -127,31 +127,19 @@ def New_Customer_Ratio():
     chart = plot_eda_pic.get_new_customer_ratio(sale_data)
     return render_template('New_Customer_Ratio.html', chart=chart)
 
-@app.route('/Get_RFM',methods=['GET', 'POST'])
-def Get_RFM():
-    if request.method == 'POST':
-        file = open(os.path.dirname(os.path.abspath(__file__))+'/Wrangling.py', 'r').read()
-        #exec(file)
-        #while not os.path.exists(path+'/sales_data.csv'):
-        #    return flash('Calculating')
-        return '開發中'
-    else:
-        return render_template('Get_RFM.html')
-
-
 if __name__ == '__main__':
     app.debug = True
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
     app.jinja_env.auto_reload = True
     app.run()
 
-def get_predict_result(member_code):
-    rslt_df = c_ltv[c_ltv['member_code'] == np.float64(member_code)]
+def get_predict_result(CustomerID):
+    rslt_df = c_ltv[c_ltv['CustomerID'] == np.float64(CustomerID)]
     rslt_df = rslt_df.drop('Unnamed: 0',axis=1)
     return rslt_df
 
-def get_recommand_item_10(member_code):
-    item_description = get_customer_last_product(member_code)
+def get_recommand_item_10(CustomerID):
+    item_description = get_customer_last_product(CustomerID)
     stocklens_stock_embedding["vector"] = stocklens_stock_embedding["vector"].map(lambda x: np.array(json.loads(x)))
 
     item_embedding = stocklens_stock_embedding.loc[stocklens_stock_embedding["word"] == item_description.values.item(), "vector"].iloc[0]
@@ -162,9 +150,9 @@ def get_recommand_item_10(member_code):
     recommand_item_result = stocklens_stock_embedding.sort_values(by="sim_value", ascending=False)[["word", "sim_value"]].head(10)
     return item_description,recommand_item_result
 
-def get_customer_last_product(member_code):
-    member1 = sale_data.loc[sale_data['member_code'] == np.float64(member_code)]
-    Description = member1['stock_description'].tail(1)
+def get_customer_last_product(CustomerID):
+    member1 = sale_data.loc[sale_data['CustomerID'] == np.float64(CustomerID)]
+    Description = member1['Description'].tail(1)
     return Description
 
 

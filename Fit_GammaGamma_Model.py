@@ -1,8 +1,7 @@
 import os
 from datetime import datetime
 import pandas as pd
-from lifetimes import BetaGeoFitter,GammaGammaFitter
-
+from lifetimes import ModifiedBetaGeoFitter,GammaGammaFitter
 pd.options.display.float_format = '{:,.2f}'.format
 
 #get predict rlt
@@ -15,7 +14,7 @@ predict_rlt = pd.read_csv(path+'/predict_rlt.csv')
 
 #Loading bgf model
 path_model = os.path.join(os.path.dirname(os.path.abspath(__file__))+'/', 'model')
-bgf = BetaGeoFitter()
+bgf = ModifiedBetaGeoFitter()
 bgf.load_model(path_model+'/bgf.pkl')
 
 # select customers with monetary value > 0
@@ -28,12 +27,8 @@ corr_matrix = df_rftv[["monetary_value", "frequency"]].corr()
 corr = corr_matrix.iloc[1,0]
 print("Pearson correlation: %.3f" % corr)
 
-# outlier
-df_rftv[df_rftv["monetary_value"] == df_rftv["monetary_value"].max()]
-
-
 # fitting the Gamma-Gamma model
-ggf = GammaGammaFitter(penalizer_coef = 0)
+ggf = GammaGammaFitter(penalizer_coef = 1e-07)
 ggf.fit(
         frequency = df_rftv["frequency"],
         monetary_value = df_rftv["monetary_value"],
@@ -61,7 +56,6 @@ clv = ggf.customer_lifetime_value(
         discount_rate = discount_m)
 
 df_rftv.insert(0, "CLV", clv)             # expected customer lifetime values
-df_rftv= df_rftv.drop('Unnamed: 0',axis =1)
 print(df_rftv.describe().T)
 
 print(df_rftv.sort_values(by="CLV", ascending=False))
