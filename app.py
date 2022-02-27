@@ -24,7 +24,7 @@ path = os.path.join(os.path.dirname(os.path.abspath(__file__))+'/', directory)
 sale_data = pd.read_csv(path+'/sales_data_with_wrangling.csv')
 
 # Read customer ltv
-c_ltv = pd.read_csv(path+'/ltv_and_rfm_with_clustring.csv')
+c_ltv = pd.read_csv(path+'/ltv_rfm_with_clustring.csv')
 
 #Read stocklens_stock_embedding
 stocklens_stock_embedding = pd.read_csv(path+'/stocklens_stock_embedding.csv')
@@ -61,9 +61,9 @@ def result():
         CustomerID = request.values['Name']
         rslt_df=get_predict_result(CustomerID)
         print(rslt_df)
-        if rslt_df['clv_Segment'].to_string(index=False) == 'Mid-Value':
+        if rslt_df['clv_Segment'].to_string(index=False) == 'Mid':
             clv_clustring = '中價值客戶群'
-        elif rslt_df['clv_Segment'].to_string(index=False) == 'Low-Value':
+        elif rslt_df['clv_Segment'].to_string(index=False) == 'Low':
             clv_clustring = '低價值客戶群'
         else:
             clv_clustring = '高價值客戶群'
